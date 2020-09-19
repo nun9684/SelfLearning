@@ -1,0 +1,18 @@
+version: '2'
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo_qr_packaging
+    environment:
+      - MONGO_INIDB_DATABASE='QRPackaging_DB'
+    ports:
+      - '27017:27017'
+  mongo-express:
+    image: mongo-express
+    container_name: mongo_express_qr_packaging
+    depends_on:
+      - 'mongo'
+    ports:
+      - '8081:8081'
+    environment:
+      - 'ME_CONFIG_OPTIONS_EDITORTHEME=ambiance'

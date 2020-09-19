@@ -1,0 +1,44 @@
+title Searching
+participant User
+participant View
+participant Control
+participant Model
+participant DatabaseManager
+participant ServerSide
+database dbReviewList
+
+User -> View : input text and Click on Search icon
+activate View
+    View ->Control: Check input text
+    activate Control
+    	Control -> Control : Check text input is review ID or food key word
+    	Control -> Control : Call search function 
+      activate DatabaseManager
+       alt food key word
+        Control -> DatabaseManager : Call request function with food keyword
+            DatabaseManager -> ServerSide : Send API Get \nPath: : /reviews?query=:text
+            activate ServerSide
+            ServerSide ->dbReviewList: Query 
+            dbReviewList ->ServerSide: Return result
+            ServerSide ->DatabaseManager : return result
+            deactivate ServerSide
+       else review ID
+        Control ->DatabaseManager : Call request function with review ID
+            DatabaseManager -> ServerSide : Send API Get \nPath: /reviews/:id
+            activate ServerSide
+            ServerSide ->dbReviewList: Query 
+            dbReviewList ->ServerSide: Return result
+            ServerSide ->DatabaseManager : return result
+            deactivate ServerSide
+       end
+       DatabaseManager ->Control : return result
+       deactivate DatabaseManager
+      Control ->Model : Pack result to model
+      activate Model
+      	Model -> Model : Init data
+        Control -> Model : Call get data with HTML format
+        Model -> Control : Return HTML format
+      deactivate Model
+	Control -> View : Update HTML 
+    View -> User : Display search result to user
+    end 

@@ -1,0 +1,36 @@
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container has-text-centered">  
+            <h1 class="title">{{packageIDText}}</h1>  
+        </div>
+    </div>
+ </section>
+
+<section class="hero is-is-warning">
+    <div class="tile is-ancestor">
+        <div class="tile">
+            <div class="tile is-vertical is-parent">
+                <div class="container has-text-centered is-child">  
+                    <h1 class="title">ที่อยู่ผู้ส่ง</h1>  
+                </div>
+                <div class="control is-child">
+                    <textarea class="textarea is-primary has-fixed-size" id="senderAddress" [(ngModel)]="textSenderAddress" placeholder="ที่อยู่ผู้ส่ง"></textarea>
+                </div>
+            </div>
+            <div class="tile is-parent is-vertical">
+                <div class="container has-text-centered is-child">  
+                    <h1 class="title">ที่อยู่ผู้รับ</h1>  
+                </div>
+                <div class="control is-child">
+                    <textarea class="textarea is-primary has-fixed-size" id="receiverAddress" [(ngModel)]="textReceiverAddress" placeholder="ที่อยู่ผู้รับ"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container has-text-centered">
+        <button class="button is-primary is-large" (click)="AcceptForm()">ยืนยัน</button>
+    </div>
+</section>

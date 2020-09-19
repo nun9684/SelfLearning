@@ -1,0 +1,65 @@
+ <section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container has-text-centered" >  
+            <h1 class="title">{{userIDtext}}</h1>  
+        </div>
+    </div>
+</section>
+<mat-tab-group>
+    <mat-tab label="การใช้งานทั่วไป">
+        <div class="container">
+            <section class="hero is-is-warning">
+                <div class="tile is-ancestor">
+                    <div class="tile">
+                        <div class="tile is-vertical is-parent">
+                            <div class="container has-text-centered is-child">  
+                                <h1 class="title">ที่อยู่ผู้ส่ง</h1>  
+                            </div>
+                            <div class="control is-child">
+                                <textarea class="textarea is-primary has-fixed-size" id="senderAddress" [(ngModel)]="textSenderAddress" placeholder="ที่อยู่ผู้ส่ง" #taSender></textarea>
+                            </div>
+                        </div>
+                        <div class="tile is-parent is-vertical">
+                            <div class="container has-text-centered is-child">  
+                                <h1 class="title">ที่อยู่ผู้รับ</h1>  
+                            </div>
+                            <div class="control is-child">
+                                <textarea class="textarea is-primary has-fixed-size" id="receiverAddress" [(ngModel)]="textReceiverAddress" placeholder="ที่อยู่ผู้รับ" #taReceiver></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container has-text-centered">
+                    <button class="button is-primary is-large" (click)="sendPutRequest()">ยืนยัน</button>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container has-text-centered">
+                    <div class="result" *ngIf="resultInformation.packageID != ''">
+                        <p>ลงทะเบียนพัสดุสำเร็จ</p>
+                        <p>เลขพัสดุ: {{resultInformation.packageID}}</p>
+                        <p>รหัสพัสดุ: {{resultInformation.credential}}</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </mat-tab>
+    <mat-tab label="พัสดุ"> 
+        <div class="columns is-centered">
+            <mat-list>
+                <mat-list-item *ngFor="let package of packageList">
+                    <div class="box">
+                        <h3 matLine>รหัสพัสดุ: {{package.PackageID}}</h3>
+                        <p matLine>รหัสผ่าน: {{package.Credential}}</p>
+                        <p matLine>ที่อยู่ผู้รับ: {{package.ReceiverAddress}}</p>
+                        <p matLine>ที่อยู่ผู้ส่ง: {{package.SenderAddress}}</p>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </mat-tab>
+</mat-tab-group>

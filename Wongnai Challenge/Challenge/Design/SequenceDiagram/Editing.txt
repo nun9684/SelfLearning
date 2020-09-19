@@ -1,0 +1,35 @@
+title Editing
+
+participant User
+participant View
+participant Control
+participant DatabaseManager
+participant ServerSide
+database dbReviewList
+
+note over User,dbReviewList: After finish with **Searching** 
+User -> View : Click on edit Icon
+activate View
+View -> Control: Call Pop Up Control
+activate Control
+Control -> View: Return Pop Up form
+deactivate Control
+View -> User : Display Pop Up on the top of screen
+deactivate View
+
+User -> View: Input text and confirm
+activate View
+View ->Control: Call Confiirm form control
+activate Control
+Control ->DatabaseManager: Call API PUT to update review description
+activate DatabaseManager
+DatabaseManager ->ServerSide: Send PUT Request\n**Path** /reviews/:id
+activate ServerSide
+ServerSide ->dbReviewList: Update review description
+ServerSide ->DatabaseManager: Return result
+deactivate ServerSide
+DatabaseManager ->Control: Return result
+deactivate DatabaseManager
+Control -> View: Return Update form result
+deactivate Control
+View -> User : Display update form result
